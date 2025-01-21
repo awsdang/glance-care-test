@@ -23,7 +23,7 @@ export const Leaderboard: React.FC<Props> = ({ movies }) => {
     ).sort((a, b) => showNominations ? b.nominations - a.nominations : b.wins - a.wins).slice(0, 10);
 
     return (
-        <div className="p-6 rounded-lg shadow-lg bg-gray-800">
+        <div className="p-6 rounded-lg shadow-lg bg-gray-800 mb-4">
             <button 
                 className="mb-4 p-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700" 
                 onClick={() => setShowNominations(!showNominations)}
