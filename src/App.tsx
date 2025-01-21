@@ -8,25 +8,41 @@ import { MovieCard } from "./components/movieCard";
 import { Leaderboard } from "./components/leaderboard";
 import { CountryLanguageInsights } from "./components/countryLanguageInsights";
 import { Loader2 } from 'lucide-react'
-
+import { removeDuplicates } from "./lib/removeDuplicates";
 
 
 const API_URL = "/api/guK8Sdo"
 
 
-const removeDuplicates = (movies: Movie[]): Movie[] => {
-  const seenTitles = new Set<string>();
-  return movies.filter((movie) => {
-    if (seenTitles.has(movie.title)) {
-      return false;
-    } else {
-      seenTitles.add(movie.title);
-      return true;
-    }
-  });
-};
+/**
+ * The main component of the application that fetches and displays movie data.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @remarks
+ * This component fetches movie data from an API, removes duplicates, and sets the data state.
+ * It also provides a search and filter functionality for the movies.
+ * The view can be toggled between a chart view and a card view.
+ * 
+ * @example
+ * ```tsx
+ * import React from 'react';
+ * import App from './App';
+ * 
+ * const Root = () => (
+ *   <React.StrictMode>
+ *     <App />
+ *   </React.StrictMode>
+ * );
+ * 
+ * export default Root;
+ * ```
+ * 
+ * @returns {JSX.Element} The rendered component.
+ */
 
-const App = () => {
+const App:React.FC = () => {
   const [data, setData] = useState<Movie[]>()
   const [movies, setMovies] = useState<Movie[]>();
   const [view, setView] = useState<string>('chart');
