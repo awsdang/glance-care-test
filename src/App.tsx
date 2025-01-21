@@ -3,14 +3,29 @@ import axios from "axios";
 import Movie from "./types/movie";
 import { SearchElement } from "./components/search";
 import { FilterElement } from "./components/filter";
+import { MovieTimeline } from "./components/timeline";
+
 
 
 const API_URL = "/api/guK8Sdo"
 
 
+const removeDuplicates = (movies: Movie[]): Movie[] => {
+  const seenTitles = new Set<string>();
+  return movies.filter((movie) => {
+    if (seenTitles.has(movie.title)) {
+      return false;
+    } else {
+      seenTitles.add(movie.title);
+      return true; 
+    }
+  });
+};
+
 const App = () => {
   const [data, setData] = useState<Movie[]>()
   const [movies, setMovies] = useState<Movie[]>();
+  const [duplicates, setDuplicates] = useState<boolean>(false);
 
   useMemo(() => {
     if (data) return;
@@ -19,15 +34,16 @@ const App = () => {
       if (response.status !== 200) {
         new Error("Error fetching data");
       }
-      setData(response.data);
+      const movieData = removeDuplicates(response.data)
+      setData(movieData);
     }
     fetchDataAsync();
   }, [data])
 
   useEffect(() => {
+    if (!data) return
       setMovies(data)
   }, [data])
-
 
   return (
     <>
@@ -39,7 +55,7 @@ const App = () => {
             <a className="text-blue-200" href="https://linkedin.com/in/awsdang">Aws Abdulfattah</a> {' '}for Glance Care/Screening Test
           </h3>
           {data && movies && 
-
+            <>
           <div className="bg-gray-800 p-4 rounded-lg mb-4 shadow flex flex-row justify-between px-8 gap-4">
             <div className="w-1/2">
               <SearchElement data={data} movies={movies} onFilter={setMovies} />
@@ -48,9 +64,14 @@ const App = () => {
               <FilterElement data={data} movies={movies} onFilter={setMovies} />
             </div>
             
+            
           </div>
-            }
 
+<MovieTimeline movies={movies} />
+</>
+            }
+  
+            
           <div className="">
             <div className="bg-gray-800 p-4 rounded-lg">
               <h2 className="text-2xl font-bold mb-2">Movie Data</h2>
