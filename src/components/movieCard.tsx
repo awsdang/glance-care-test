@@ -48,9 +48,34 @@ export const MovieCard: React.FC<Props> = ({ movie }) => {
             <div className="text-sm font-semibold">{movie.language.join(', ')}</div>
           </div>
         </div>
-      <div className="text-sm text-gray-200">
+      <div className="text-sm text-gray-200 mb-2">
         <strong>Cast:</strong> {movie.cast.join(', ')}
       </div>
+      {movie.oscar_nominations_list && movie.oscar_nominations_list.length > 0 && 
+      <div className="text-sm  text-gray-200 gap-2 mb-2">
+        <strong className='mb-2'>Oscar Nominations for:</strong> 
+        <div className='flex flex-wrap gap-2'>
+        {movie.oscar_nominations_list.map(n => (
+          <span key={n} className="px-2 py-1 bg-purple-700/60 text-white rounded-lg text-sm">
+            {n}
+          </span>
+        ))}
+        </div>
+       
+      </div>
+      }
+      {movie.oscar_winning_list && movie.oscar_winning_list.length > 0 &&
+      <div className="text-sm text-gray-200 gap-2">
+        <strong className='mb-2'>Oscar Wins for:</strong> 
+        <div className='flex flex-wrap gap-2'>
+        {movie.oscar_winning_list.map(w => (
+          <span key={w} className="px-2 py-1 bg-yellow-400 text-black rounded-lg text-sm">
+            {w}
+          </span>
+        ))}
+           </div>
+      </div>
+      }
       </div>
     </div>
   );
