@@ -1,6 +1,6 @@
 import React from 'react';
 import Movie from '../types/movie';
-import { Award, Star, Trophy } from 'lucide-react';
+import { Award, Star, Trophy, ChevronRight } from 'lucide-react';
 
 interface TimelineProps {
     movies: Movie[];
@@ -25,23 +25,24 @@ export const MovieTimeline: React.FC<TimelineProps> = ({ movies }) => {
 
 
     return (
-        <div className="rounded-xl p-6 bg-gray-800 shadow-lg mb-4">
+        <div className="rounded-xl relative p-6 bg-gray-800 shadow-lg mb-4">
             <div className='flex flex-row justify-between items-center mb-2'>
-            <h2 className="text-2xl font-bold">Movie Timeline</h2>
-            <div className='flex flex-row gap-4'>
-            <div className='flex flex-row gap-4'>
-                <div className="w-4 h-4 rounded-full bg-yellow-500">
+                <h2 className="text-2xl font-bold">Movie Timeline</h2>
+                <div className='flex flex-row gap-4'>
+                    <div className='flex flex-row gap-4'>
+                        <div className="w-4 h-4 rounded-full bg-yellow-500">
+                        </div>
+                        <span className='text-xs'>Oscar Winner</span>
+                    </div>
+                    <div className='flex flex-row gap-4'>
+                        <div className="w-4 h-4 rounded-full bg-gray-500">
+                        </div>
+                        <span className='text-xs'>Not an Oscar Winner</span>
+                    </div>
                 </div>
-                <span className='text-xs'>Oscar Winner</span>
+
             </div>
-            <div className='flex flex-row gap-4'>
-                <div className="w-4 h-4 rounded-full bg-gray-500">
-                </div>
-                <span className='text-xs'>Not an Oscar Winner</span>
-            </div>
-            </div>
-            </div>
-            <div className="timeline-scroll overflow-visible overflow-x-auto pb-4 h-12 hover:h-40 flex place-items-end px-32 transition-all duration-700">
+            <div className="timeline-scroll scrollbar-thin overflow-visible overflow-x-auto pb-4 h-12 hover:h-48 flex place-items-end px-32 transition-all duration-700">
                 <div className="relative h-full min-w-[200%]">
                     {/* Movie nodes */}
                     <div className="absolute z-50 w-full h-full">
@@ -53,7 +54,7 @@ export const MovieTimeline: React.FC<TimelineProps> = ({ movies }) => {
                                     <div
                                         key={`${movie.title}-${year}-${index}`}
                                         className={`absolute transform group
-                    transition-transform duration-300 ease-in-out top-4`}
+                    transition-transform duration-300 ease-in-out top-5`}
                                         style={{
                                             left: `calc(${((years.indexOf(year)) / (years.length - 1)) * 100}% + ${offset}px)`,
                                         }}
@@ -65,9 +66,8 @@ export const MovieTimeline: React.FC<TimelineProps> = ({ movies }) => {
                                         />
 
                                         {/* Hover card */}
-                                        <div className="absolute  left-1/2 -translate-x-1/2 mb-2 w-64
-                    opacity-0 group-hover:opacity-100 transition-opacity z-50 bg-gray-800 rounded p-4">
-                                            <div className="rounded-lg shadow-xl">
+                                        <div className=" absolute top-6 left-1/2 -translate-x-1/2 mb-2 w-72 opacity-0 group-hover:opacity-100 transition-opacity z-50 rounded p-4">
+                                            <div className="rounded-lg bg-gray-700 p-3 shadow-xl">
                                                 <h3 className="font-bold mb-1">{movie.title}</h3>
                                                 <div className="flex items-center gap-2 mb-1">
                                                     <Star className="w-4 h-4 text-yellow-500" />
@@ -95,10 +95,10 @@ export const MovieTimeline: React.FC<TimelineProps> = ({ movies }) => {
 
 
                     {/* Timeline line */}
-                    <div className="absolute top-6 w-full h-0.5 bg-gray-700" />
+                    <div className="absolute top-7 w-full h-0.5 bg-gray-700" />
 
 
-                    <div className="absolute w-full flex justify-between top-8">
+                    <div className="absolute w-full flex justify-between top-0">
                         {years.map(year => (
                             <div key={year} className="text-sm text-gray-400"
                                 style={{
@@ -109,6 +109,11 @@ export const MovieTimeline: React.FC<TimelineProps> = ({ movies }) => {
                         ))}
                     </div>
                 </div>
+              
+            </div>
+            <div className='absolute right-8 top-20'>
+            <ChevronRight className=''/>
+
             </div>
         </div>
     );
