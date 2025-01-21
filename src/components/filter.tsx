@@ -8,6 +8,20 @@ interface FilterProps {
   onFilter: (filtered: Movie[]) => void;
 }
 
+/**
+ * FilterElement component allows users to filter a list of movies by genre.
+ *
+ * @component
+ * @param {FilterProps} props - The properties for the FilterElement component.
+ * @param {Array} props.data - The original list of movies.
+ * @param {Array} props.movies - The current list of movies to be filtered.
+ * @param {Function} props.onFilter - Callback function to handle the filtered list of movies.
+ *
+ * @returns {JSX.Element} The rendered FilterElement component.
+ *
+ * @example
+ * <FilterElement data={moviesData} movies={filteredMovies} onFilter={handleFilter} />
+ */
 export const FilterElement: React.FC<FilterProps> = ({ data, movies, onFilter }) => {
   const [selectedGenre, setSelectedGenre] = useState('');
 

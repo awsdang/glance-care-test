@@ -5,6 +5,28 @@ interface Props {
     movies: Movie[];
 }
 
+/**
+ * Leaderboard component displays top 10 movies and actors based on Oscar nominations or wins.
+ * 
+ * @component
+ * @param {Props} props - The properties object.
+ * @param {Array} props.movies - The list of movies to be displayed in the leaderboard.
+ * 
+ * @returns {JSX.Element} The rendered Leaderboard component.
+ * 
+ * @example
+ * const movies = [
+ *   {
+ *     title: "Movie Title",
+ *     oscar_nominations: 5,
+ *     oscar_winning: 2,
+ *     cast: ["Actor 1", "Actor 2"]
+ *   },
+ *   // more movies
+ * ];
+ * 
+ * <Leaderboard movies={movies} />
+ */
 export const Leaderboard: React.FC<Props> = ({ movies }) => {
     const [view, setView] = useState<string>('');
     const [oscars, setOscars] = useState<{ title: string; nominations: number; wins: number; }[]>([]);
@@ -31,7 +53,7 @@ export const Leaderboard: React.FC<Props> = ({ movies }) => {
     
     return (
         <div className="p-6 rounded-lg shadow-lg bg-gray-800 mb-4">
-            <div className='flex flex-row gap-4'>
+            <div className='flex flex-row gap-4 justify-center' >
             <button 
                 className="mb-4 p-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700" 
                 onClick={() => setView(view === 'wins' ? '' : 'wins')}

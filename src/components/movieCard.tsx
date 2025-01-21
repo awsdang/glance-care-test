@@ -1,11 +1,31 @@
 import React, { useState } from 'react';
-import { Star, Award, Trophy, ChevronDown, ChevronUp } from 'lucide-react';
+import { Star, Award, Trophy, ChevronDown } from 'lucide-react';
 import Movie from '../types/movie';
 
 interface Props {
   movie: Movie;
 }
 
+/**
+ * A React functional component that displays a movie card with various details.
+ * The card can be expanded to show more information.
+ *
+ * @component
+ * @param {Props} props - The properties object.
+ * @param {Object} props.movie - The movie object containing details to display.
+ * @param {string} props.movie.title - The title of the movie.
+ * @param {number} props.movie.year - The release year of the movie.
+ * @param {number} props.movie.imdb_rating - The IMDb rating of the movie.
+ * @param {string[]} props.movie.genre - The genres of the movie.
+ * @param {number} props.movie.oscar_nominations - The number of Oscar nominations the movie received.
+ * @param {number} props.movie.oscar_winning - The number of Oscars the movie won.
+ * @param {string[]} props.movie.language - The languages the movie is available in.
+ * @param {string[]} props.movie.cast - The cast of the movie.
+ * @param {string[]} [props.movie.oscar_nominations_list] - The list of Oscar nominations the movie received.
+ * @param {string[]} [props.movie.oscar_winning_list] - The list of Oscars the movie won.
+ *
+ * @returns {JSX.Element} The rendered movie card component.
+ */
 export const MovieCard: React.FC<Props> = ({ movie }) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
   return (

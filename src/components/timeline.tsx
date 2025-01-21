@@ -9,6 +9,30 @@ interface MoviesByYear {
     [year: number]: Movie[];
 }
 
+/**
+ * Component that renders a timeline of movies grouped by year.
+ * Each movie is represented as a node on the timeline, with additional
+ * information displayed on hover.
+ *
+ * @component
+ * @param {TimelineProps} props - The properties for the MovieTimeline component.
+ * @param {Array<Movie>} props.movies - An array of movie objects to be displayed on the timeline.
+ *
+ * @typedef {Object} Movie
+ * @property {string} title - The title of the movie.
+ * @property {string} year - The release year of the movie.
+ * @property {number} imdb_rating - The IMDb rating of the movie.
+ * @property {number} oscar_nominations - The number of Oscar nominations the movie received.
+ * @property {number} oscar_winning - The number of Oscars the movie won.
+ * @property {Array<string>} genre - The genres of the movie.
+ *
+ * @typedef {Object} TimelineProps
+ * @property {Array<Movie>} movies - An array of movie objects to be displayed on the timeline.
+ *
+ * @typedef {Object.<number, Array<Movie>>} MoviesByYear - An object where the keys are years and the values are arrays of movies released in that year.
+ *
+ * @returns {JSX.Element} The rendered MovieTimeline component.
+ */
 export const MovieTimeline: React.FC<TimelineProps> = ({ movies }) => {
     const moviesByYear: MoviesByYear = movies.reduce((acc, movie) => {
         const year = Number(movie.year);

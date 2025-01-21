@@ -8,6 +8,26 @@ interface Props {
 
 const colors = ['#1976D2', '#2196F3', '#64B5F6', '#90CAF9', '#BBDEFB', '#E3F2FD'];
 
+/**
+ * CountryLanguageChart component displays a bar chart that provides insights into the distribution
+ * of movies by language and country.
+ *
+ * @component
+ * @param {Props} props - The props for the component.
+ * @param {Array} props.movies - An array of movie objects, where each movie object contains `country` and `language` properties.
+ *
+ * @returns {JSX.Element} A responsive bar chart visualizing the number of movies per language and country.
+ *
+ * @example
+ * const movies = [
+ *   { country: 'USA', language: 'English' },
+ *   { country: 'France', language: 'French' },
+ *   { country: 'USA', language: 'Spanish' },
+ *   // more movie objects
+ * ];
+ * 
+ * <CountryLanguageChart movies={movies} />
+ */
 export const CountryLanguageChart: React.FC<Props> = ({ movies }) => {
     const countries = Array.from(new Set(movies.flatMap(movie => movie.country)));
     const languages = Array.from(new Set(movies.flatMap(movie => movie.language)));

@@ -9,6 +9,20 @@ interface SearchProps {
 }
 
 
+/**
+ * SearchElement component allows users to search through a list of movies.
+ * 
+ * @component
+ * @param {SearchProps} props - The properties passed to the component.
+ * @param {Array} props.data - The original list of movies.
+ * @param {Array} props.movies - The list of movies to be filtered.
+ * @param {Function} props.onFilter - The function to call with the filtered list of movies.
+ * 
+ * @returns {JSX.Element} The rendered search input element.
+ * 
+ * @example
+ * <SearchElement data={data} movies={movies} onFilter={handleFilter} />
+ */
 export const SearchElement: React.FC<SearchProps> = ({data, movies, onFilter }) => {
     const [search, setSearch] = useState('');
     
