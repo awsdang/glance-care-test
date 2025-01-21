@@ -82,12 +82,12 @@ export const CountryLanguagePies: React.FC<Props> = ({ movies }) => {
         <>
             <div className='flex flex-row w-full justify-between px-6 py-4'>
                 <div className='mb-2'>
-                <h2 className="text-2xl w-[800px] text-left font-bold">Language Inights</h2>
+                <h2 className="text-2xl w-[800px] text-left font-bold">Language Insights</h2>
                 <p className='text-sm'>{totalLanguages} languages in {totalMovies} movies</p>
                 
                 </div>
                 <div className='mb-2'>
-                <h2 className="text-2xl w-[800px] text-left font-bold">Country Inights</h2>
+                <h2 className="text-2xl w-[800px] text-left font-bold">Country Insights</h2>
                 <p className='text-sm'>{totalCountries} countries in {totalMovies} movies</p>
                 
                 </div>
