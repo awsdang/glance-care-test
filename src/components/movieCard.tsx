@@ -9,7 +9,7 @@ interface Props {
 export const MovieCard: React.FC<Props> = ({ movie }) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
   return (
-    <div className="bg-gray-700 p-6 rounded-lg shadow-lg group cursor-pointer" onClick={() => setExpanded(!isExpanded)}>
+    <div className="bg-gray-800 p-6 rounded-lg shadow-lg group cursor-pointer" onClick={() => setExpanded(!isExpanded)}>
       <h3 className="text-xl font-bold mb-2">{movie.title}</h3>
       <div className="flex justify-between items-center  text-gray-300 ">
         <div className='flex flex-row items-center gap-2'>
