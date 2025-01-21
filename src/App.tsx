@@ -5,6 +5,9 @@ import { SearchElement } from "./components/search";
 import { FilterElement } from "./components/filter";
 import { MovieTimeline } from "./components/timeline";
 import { MovieCard } from "./components/movieCard";
+import { Leaderboard } from "./components/leaderboard";
+import { CountryLanguageInsights } from "./components/countryLanguageInsights";
+import { Loader2 } from 'lucide-react'
 
 
 
@@ -26,7 +29,7 @@ const removeDuplicates = (movies: Movie[]): Movie[] => {
 const App = () => {
   const [data, setData] = useState<Movie[]>()
   const [movies, setMovies] = useState<Movie[]>();
-
+  const [view, setView] = useState<string>('chart');
 
   useMemo(() => {
     if (data) return;
@@ -46,6 +49,19 @@ const App = () => {
     setMovies(data)
   }, [data])
 
+  if (!movies || !data) {
+    return (
+    <>
+    <main className="mx-auto p-4 bg-gray-900 min-h-screen h-full text-white w-full">
+      <div className="flex flex-col justify-center items-center mt-24">
+    <Loader2 className="mx-auto animate-spin" size={64} />
+    Loading
+    </div>
+    </main></>
+    )
+  }
+
+
   return (
     <>
 
@@ -55,7 +71,7 @@ const App = () => {
           <h3 className="text-md mb-8">Made by {' '}
             <a className="text-blue-200" href="https://linkedin.com/in/awsdang">Aws Abdulfattah</a> {' '}for Glance Care/Screening Test
           </h3>
-          {data && movies &&
+          
             <>
               <div className="bg-gray-800 p-4 rounded-lg mb-4 shadow flex flex-row justify-between px-8 gap-4">
                 <div className="w-1/2">
@@ -67,23 +83,47 @@ const App = () => {
 
 
               </div>
-
-              <MovieTimeline movies={movies} />
-
-
             </>
-          }
-
           
-          
-          <div className="">
-            <div className="bg-gray-800 p-2 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4">
-            {movies && movies.map((movie) => (
-            <MovieCard movie={movie} />
-          ))}
-            </div>
 
-          </div>
+                        <div className="">
+                   
+                          <ul className="flex justify-center mb-4 select-none cursor-pointer" onClick={() => setView(view === 'chart'?'cards': 'chart')}>
+                            <div className="flex relative flex-row bg-gray-800 rounded-lg px-1 py-2">
+                              
+                            <li className="mr-4 z-50" >
+                              <label htmlFor="tab1" className={`cursor-pointer py-2 px-4 z-50`}>
+                                <span>Charts</span>
+                              </label>
+                            </li>
+                            <li className="z-50">
+                              <label htmlFor="tab2" className={`cursor-pointer py-2 px-4 z-50`}>
+                                <span>Cards</span>
+                              </label>
+                            </li>
+                            <div className={`absolute w-1/2 h-5/6 top-1/2 -translate-y-1/2 rounded-lg bg-gray-700 transform duration-500 ${view === 'chart'? 'translate-x-0' : 'translate-x-[90%]'}`}></div>
+                            </div>
+                          </ul>
+
+                          <div className="content">
+                            {view === 'chart' &&
+                            <section className="p-4">
+                                  <MovieTimeline movies={movies} />
+                                  <Leaderboard movies={movies} />
+                                  <CountryLanguageInsights movies={movies} />
+                            </section>}
+                            {view === 'cards' &&
+                            <section className="p-4">
+                              <div className="grid grid-cols-1 gap-2">
+                            
+                                  {movies.map((movie) => (
+                                    <MovieCard key={movie.title} movie={movie} />
+                                  ))}
+                              </div>
+                            </section>}
+                          </div>
+                        </div>
+                 
         </div>
       </main>
     </>
