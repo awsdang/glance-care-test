@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 import Movie from "./types/movie";
 import { SearchElement } from "./components/search";
@@ -47,12 +47,13 @@ const App:React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>();
   const [view, setView] = useState<string>('chart');
 
-  useMemo(() => {
+  useEffect(() => {
     if (data) return;
     const fetchDataAsync = async () => {
       const response = await axios.get(API_URL);
       if (response.status !== 200) {
         new Error("Error fetching data");
+        return
       }
       const movieData = removeDuplicates(response.data)
       setData(movieData);
