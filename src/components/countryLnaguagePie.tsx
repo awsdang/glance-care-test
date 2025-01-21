@@ -81,21 +81,21 @@ export const CountryLanguagePies: React.FC<Props> = ({ movies }) => {
     return (
         <>
             <div className='flex flex-row w-full justify-between px-6 py-4'>
-                <div className='mb-2'>
-                <h2 className="text-2xl w-[800px] text-left font-bold">Language Insights</h2>
+                <div className='mb-2 w-1/2'>
+                <h2 className="text-2xl w-full text-left font-bold">Language Insights</h2>
                 <p className='text-sm'>{totalLanguages} languages in {totalMovies} movies</p>
                 
                 </div>
-                <div className='mb-2'>
-                <h2 className="text-2xl w-[800px] text-left font-bold">Country Insights</h2>
+                <div className='mb-2 w-1/2'>
+                <h2 className="text-2xl text-left font-bold">Country Insights</h2>
                 <p className='text-sm'>{totalCountries} countries in {totalMovies} movies</p>
                 
                 </div>
                 
             </div>
 
-            <div className='w-full h-72 mb-2 px-6 rounded-lg  bg-gray-800 flex flex-row'>
-                <ResponsiveContainer width="100%" height='90%'>
+            <div className='w-full h-72 mb-2 px-6 rounded-lg bg-gray-800 flex flex-row'>
+                <ResponsiveContainer width="50%" height='90%'>
                     <PieChart width={800} height={800}>
                         <Pie
                             activeIndex={activeIndexLanguage}
@@ -112,7 +112,7 @@ export const CountryLanguagePies: React.FC<Props> = ({ movies }) => {
                     </PieChart>
                 </ResponsiveContainer>
 
-                <ResponsiveContainer width="100%" height='90%'>
+                <ResponsiveContainer width="50%" height='90%'>
                     <PieChart width={800} height={800}>
                         <Pie
                             activeIndex={activeIndexCountry}
